@@ -20,7 +20,7 @@ public class ApiValidationExceptionHandler extends ResponseEntityExceptionHandle
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
-            HttpStatus status, WebRequest request){
+            HttpStatus status, WebRequest request) {
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         List<ApiFieldError> apiFieldErrors = fieldErrors.stream()
@@ -30,14 +30,14 @@ public class ApiValidationExceptionHandler extends ResponseEntityExceptionHandle
                         fieldError.getDefaultMessage()))
                 .collect(Collectors.toList());
 
-    }
 
-    ApiErrorsResponseBody apiErrorsResponseBody = new ApiErrorsResponseBody<ApiFieldError>(
-            HttpStatus.BAD_REQUEST.value(),
-            HttpStatus.BAD_REQUEST.getReasonPhrase(),
-            apiFieldErrors);
+        ApiErrorsResponseBody apiErrorsResponseBody = new ApiErrorsResponseBody<ApiFieldError>(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                apiFieldErrors);
 
         return ResponseEntity
                 .badRequest()
                 .body(apiErrorsResponseBody);
+    }
 }
