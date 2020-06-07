@@ -21,4 +21,8 @@ public class CourseMode {
 
     @OneToMany(mappedBy = "courseMode")
     private Set<Course> courses;
+
+    public CourseMode(String mode) {
+        this.mode = mode;
+    }
 }

@@ -21,4 +21,10 @@ public class CompanyCategory {
 
     @OneToMany(mappedBy = "companyCategory")
     private Set<Company> companies;
+
+    public CompanyCategory(String category) {
+        this.category = category;
+    }
+
+
 }
