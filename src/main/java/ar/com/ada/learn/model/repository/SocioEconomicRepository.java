@@ -1,4 +1,4 @@
 package ar.com.ada.learn.model.repository;
 
-public interface SocioeconomicRepository {
+public interface SocioEconomicRepository {
 }

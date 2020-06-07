@@ -35,6 +35,6 @@ public class Representative {
     private String identificationType;
 
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "id",nullable = false)
     private Company company;
 }

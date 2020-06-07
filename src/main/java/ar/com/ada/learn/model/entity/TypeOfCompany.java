@@ -19,6 +19,6 @@ public class TypeOfCompany {
     @Column(name = "type", nullable = false, length = 50)
     private String type;
 
-    @OneToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "typeOfCompany")
     private Set<Company> companies;
 }

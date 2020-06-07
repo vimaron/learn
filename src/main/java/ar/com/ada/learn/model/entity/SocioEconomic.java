@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity(name = "socioeconomic")
-public class Socioeconomic {
+public class SocioEconomic {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,6 +36,6 @@ public class Socioeconomic {
     private Integer family;
 
     @OneToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private Student student;
 }

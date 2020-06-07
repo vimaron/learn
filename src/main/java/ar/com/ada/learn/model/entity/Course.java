@@ -39,17 +39,17 @@ public class Course {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "Company_id")
+    @JoinColumn(name = "Company_id", referencedColumnName = "id", nullable = false)
     private Company company;
 
     @ManyToOne
-    @JoinColumn(name = "course_mode", nullable = false)
-    private CourseMode mode;
+    @JoinColumn(name = "course_mode_id", referencedColumnName = "id",nullable = false)
+    private CourseMode courseMode;
 
     @ManyToOne
-    @JoinColumn(name = "type_of_course", nullable = false)
-    private TypeOfCourse type;
+    @JoinColumn(name = "type_of_course_id", referencedColumnName = "id",nullable = false)
+    private TypeOfCourse typeOfCourse;
 
-    @ManyToMany(mappedBy = "courses")
-    private Set<Student> students;
+    @OneToMany(mappedBy = "course")
+    private Set<StudentHasCourse> studentHasCourses;
 }

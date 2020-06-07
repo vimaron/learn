@@ -19,6 +19,6 @@ public class CompanyCategory {
     @Column(name = "category", nullable = false, length = 50)
     private String category;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "companyCategory")
     private Set<Company> companies;
 }

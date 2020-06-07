@@ -19,6 +19,6 @@ public class CourseMode {
     @Column(name = "mode", nullable = false, length = 50)
     private String mode;
 
-    @OneToMany(mappedBy = "mode")
+    @OneToMany(mappedBy = "courseMode")
     private Set<Course> courses;
 }

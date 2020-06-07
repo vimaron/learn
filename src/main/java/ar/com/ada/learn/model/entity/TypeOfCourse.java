@@ -20,6 +20,6 @@ public class TypeOfCourse {
     @Column(name = "type", nullable = false, length = 100)
     private String type;
 
-    @OneToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "typeOfCourse")
     private Set<Course> courses;
 }

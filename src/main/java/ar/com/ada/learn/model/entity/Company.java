@@ -33,16 +33,16 @@ public class Company {
     private String contactNumber;
 
     @ManyToOne
-    @JoinColumn(name = "type_ of_company_id")
-    private TypeOfCompany type;
-
-    @ManyToOne
-    @JoinColumn(name = "company_category_id")
-    private CompanyCategory category;
+    @JoinColumn(name = "company_category_id", referencedColumnName = "id", nullable = false)
+    private CompanyCategory companyCategory;
 
     @OneToMany(mappedBy = "company")
     private Set<Representative> representatives;
 
     @OneToMany(mappedBy = "company")
     private Set<Course> courses;
+
+    @ManyToOne
+    @JoinColumn(name = "type_of_company_id", referencedColumnName = "id",nullable = false)
+    private TypeOfCompany typeOfCompany;
 }
