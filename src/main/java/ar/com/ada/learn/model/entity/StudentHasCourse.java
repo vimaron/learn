@@ -16,6 +16,15 @@ public class StudentHasCourse implements Serializable {
     @EmbeddedId
     private StudentHasCourseId id;
 
+    @Column(name = "adj_type", nullable = false)
+    private String adjType;
+
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @Column(name = "percentage", nullable = false)
+    private Long percentage;
+
     @ManyToOne
     @MapsId("studentId")
     private Student student;

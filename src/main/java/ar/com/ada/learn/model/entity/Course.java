@@ -38,6 +38,12 @@ public class Course {
     @Column(name = "description", nullable = false, length = 200)
     private String description;
 
+    @Column(name = "cont_adj", nullable = false)
+    private Long contAdj;
+
+    @Column(name = "cont_scho", nullable = false)
+    private Long contScho;
+
     @ManyToOne
     @JoinColumn(name = "Company_id", referencedColumnName = "id", nullable = false)
     private Company company;
