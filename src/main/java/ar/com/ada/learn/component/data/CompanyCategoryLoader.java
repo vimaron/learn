@@ -19,7 +19,7 @@ public class CompanyCategoryLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        
+
         List<CompanyCategory> companyCategoryList = Arrays.asList(
                 new CompanyCategory("Marketing y publicidad"),
                 new CompanyCategory("Comercio"),
