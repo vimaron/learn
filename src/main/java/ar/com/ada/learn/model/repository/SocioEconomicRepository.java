@@ -1,4 +1,9 @@
 package ar.com.ada.learn.model.repository;
 
-public interface SocioEconomicRepository {
+import ar.com.ada.learn.model.entity.SocioEconomic;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository("representativeRepository")
+public interface SocioEconomicRepository extends JpaRepository<SocioEconomic, Long> {
 }
