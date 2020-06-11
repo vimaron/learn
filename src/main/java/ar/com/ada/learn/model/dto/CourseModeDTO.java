@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Getter @Setter
@@ -11,7 +12,10 @@ import java.util.Set;
 public class CourseModeDTO {
 
     private Long id;
+
+    @NotBlank(message = "mode is required")
     private String mode;
+
     private Set<CourseDTO> courses;
 
     public CourseModeDTO(Long id, String mode) {
