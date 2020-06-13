@@ -43,7 +43,10 @@ public class CourseService implements Services<CourseDTO>{
 
     @Override
     public CourseDTO save(CourseDTO dto) {
-        return null;
+        Course courseToSave = courseMapper.toEntity(dto);
+        Course courseSaved = courseRepository.save(courseToSave);
+        CourseDTO courseDtoSaved = courseMapper.toDto(courseSaved);
+        return courseDtoSaved;
     }
 
     @Override

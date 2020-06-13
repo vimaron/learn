@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DataCycleMapper<D, E> {
 
-    E toEntity(D dto, @Context CycleAvoidingMappingContext context);
+    E toEntity(D dto);
 
     List<E> toEntity(List<D> dtoList, @Context CycleAvoidingMappingContext context);
 

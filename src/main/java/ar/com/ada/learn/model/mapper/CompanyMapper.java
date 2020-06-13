@@ -14,5 +14,10 @@ public interface CompanyMapper extends DataCycleMapper<CompanyDTO, Company> {
 
     CompanyDTO toDto(Company entity);
 
+    default Company fromId(Long id){
+        if (id == null) return null;
+        return new Company(id);
+    }
+
 
 }

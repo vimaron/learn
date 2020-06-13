@@ -5,12 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.time.Year;
 import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
-public class CompanyDTO {
+public class CompanyDTO implements Serializable {
 
     private Long id;
 

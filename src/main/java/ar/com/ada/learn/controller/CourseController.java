@@ -5,11 +5,9 @@ import ar.com.ada.learn.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,6 +30,13 @@ public class CourseController {
 
         return ResponseEntity.ok(courseById);
     }
-    
+
+    @PostMapping({"", "/"})
+    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO){
+
+        CourseDTO courseSaved = courseService.save(courseDTO);
+
+        return ResponseEntity.ok(courseDTO);
+    }
 
 }

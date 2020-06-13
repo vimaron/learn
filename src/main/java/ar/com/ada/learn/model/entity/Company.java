@@ -45,4 +45,7 @@ public class Company {
     @ManyToOne
     @JoinColumn(name = "type_of_company_id", referencedColumnName = "id",nullable = false)
     private TypeOfCompany typeOfCompany;
+
+    public Company(Long id) {
+    }
 }
