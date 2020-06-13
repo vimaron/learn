@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Getter @Setter
@@ -11,7 +12,10 @@ import java.util.Set;
 public class TypeOfCompanyDTO {
 
     private Long id;
+
+    @NotBlank(message = "type is required")
     private String type;
+
     private Set<CompanyDTO> companies;
 
 }
