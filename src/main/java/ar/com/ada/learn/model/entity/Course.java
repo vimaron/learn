@@ -53,4 +53,7 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     private Set<StudentHasCourse> studentHasCourses;
+
+    public Course(Long id) {
+    }
 }
