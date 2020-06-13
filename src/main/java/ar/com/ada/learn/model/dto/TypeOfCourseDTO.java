@@ -15,6 +15,6 @@ public class TypeOfCourseDTO {
 
     @NotBlank(message = "type is required")
     private String type;
-    
+
     private Set<CourseDTO> courses;
 }
