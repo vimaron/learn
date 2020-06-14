@@ -36,7 +36,7 @@ public class CourseController {
 
         CourseDTO courseSaved = courseService.save(courseDTO);
 
-        return ResponseEntity.ok(courseDTO);
+        return ResponseEntity.ok(courseSaved);
     }
 
 }

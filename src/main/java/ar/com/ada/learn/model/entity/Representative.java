@@ -1,6 +1,7 @@
 package ar.com.ada.learn.model.entity;
 
 import ar.com.ada.learn.model.dto.CompanyDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity(name = "representative")
+@Builder
 public class Representative {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +39,7 @@ public class Representative {
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id",nullable = false)
     private Company company;
+
+    public Representative(Long id) {
+    }
 }

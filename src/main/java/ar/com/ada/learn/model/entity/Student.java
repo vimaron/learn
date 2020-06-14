@@ -1,5 +1,6 @@
 package ar.com.ada.learn.model.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity(name = "student")
+@Builder
 public class Student {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +41,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     private Set<StudentHasCourse> studentHasCourses;
+
+    public Student(Long id) {
+    }
 }
