@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/studentHasCourseController")
+@RequestMapping("/studentHasCourses")
 public class StudentHasCourseController {
 
     @Autowired @Qualifier("studentHasCourseService")
