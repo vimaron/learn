@@ -14,7 +14,8 @@ import java.util.Set;
 @Entity(name = "type_of_course")
 public class TypeOfCourse {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type", nullable = false, length = 100)
@@ -23,7 +24,4 @@ public class TypeOfCourse {
     @OneToMany(mappedBy = "typeOfCourse")
     private Set<Course> courses;
 
-    public TypeOfCourse(String type) {
-        this.type = type;
-    }
 }

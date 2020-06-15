@@ -38,4 +38,5 @@ public class SocioEconomic {
     @OneToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private Student student;
+
 }
