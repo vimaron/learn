@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/socioeconomic")
+@RequestMapping("/socioEconomics")
 public class SocioEconomicController {
 
     @Autowired @Qualifier("socioEconomicService")

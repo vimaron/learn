@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/representative")
+@RequestMapping("/representatives")
 public class RepresentativeController {
 
     @Autowired @Qualifier("representativeService")

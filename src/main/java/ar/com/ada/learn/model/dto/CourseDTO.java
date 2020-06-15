@@ -41,6 +41,9 @@ public class CourseDTO implements Serializable {
     @NotNull(message = "courseModeId is required")
     private Long courseModeId;
 
+    @NotNull(message = "companyId is required")
+    private Long companyId;
+
     @NotBlank(message = "capacity is required")
     private Long capacity;
 

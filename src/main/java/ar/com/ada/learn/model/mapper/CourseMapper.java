@@ -15,6 +15,7 @@ public interface CourseMapper extends DataCycleMapper<CourseDTO, Course> {
     @InheritInverseConfiguration
     @Mapping(target = "typeOfCourseId", ignore = true)
     @Mapping(target = "courseModeId", ignore = true)
+    @Mapping(target = "companyId", ignore = true)
     CourseDTO toDto(Course entity, @Context CycleAvoidingMappingContext context);
 }
 

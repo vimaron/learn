@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter @Setter
@@ -22,13 +23,16 @@ public class SocioeconomicDTO implements Serializable {
     @NotBlank(message = "income is required")
     private Boolean income;
 
-    @NotBlank(message = "monthly income is required")
+    @NotNull(message = "monthly income is required")
     private Double monthlyIncome;
 
     @NotBlank(message = "famiy in charge is required")
     private Boolean inChargeOfFamily;
 
-    @NotBlank(message = "family quantity is required")
+    @NotNull(message = "studentId is required")
+    private Long studentId;
+
+    @NotNull(message = "family quantity is required")
     private Integer family;
 
     private StudentDTO student;

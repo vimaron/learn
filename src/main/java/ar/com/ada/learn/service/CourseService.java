@@ -2,11 +2,13 @@ package ar.com.ada.learn.service;
 
 import ar.com.ada.learn.component.BusinessLogicExceptionComponent;
 import ar.com.ada.learn.model.dto.CourseDTO;
+import ar.com.ada.learn.model.entity.Company;
 import ar.com.ada.learn.model.entity.Course;
 import ar.com.ada.learn.model.entity.CourseMode;
 import ar.com.ada.learn.model.entity.TypeOfCourse;
 import ar.com.ada.learn.model.mapper.CourseMapper;
 import ar.com.ada.learn.model.mapper.CycleAvoidingMappingContext;
+import ar.com.ada.learn.model.repository.CompanyRepository;
 import ar.com.ada.learn.model.repository.CourseModelRepository;
 import ar.com.ada.learn.model.repository.CourseRepository;
 import ar.com.ada.learn.model.repository.TypeOfCourseRepository;
@@ -37,6 +39,9 @@ public class CourseService implements Services<CourseDTO>{
     @Autowired @Qualifier("courseModelRepository")
     private CourseModelRepository courseModelRepository;
 
+    @Autowired @Qualifier("companyRepository")
+    private CompanyRepository companyRepository;
+
     public CourseService(CourseMapper courseMapper) {
         this.courseMapper = courseMapper;
     }
@@ -50,6 +55,11 @@ public class CourseService implements Services<CourseDTO>{
 
     @Override
     public CourseDTO save(CourseDTO dto) {
+        Long companyId = dto.getCompanyId();
+        Company company = companyRepository
+                .findById(companyId).orElseThrow(() -> businessLogicExceptionComponent
+                        .getExceptionEntityNotFound("Company", companyId));
+
         Long typeOfCourseId = dto.getTypeOfCourseId();
         TypeOfCourse typeOfCourse = typeOfCourseRepository.findById(typeOfCourseId)
                 .orElseThrow(() -> businessLogicExceptionComponent
