@@ -3,8 +3,7 @@ package ar.com.ada.learn.service;
 import ar.com.ada.learn.model.dto.RepresentativeDTO;
 import ar.com.ada.learn.model.entity.Representative;
 import ar.com.ada.learn.model.mapper.RepresentativeMapper;
-import ar.com.ada.learn.model.mapper.circular.CycleAvoidingMappingContext;
-import ar.com.ada.learn.model.mapper.circular.RepresentativeCycleMapper;
+import ar.com.ada.learn.model.mapper.CycleAvoidingMappingContext;
 import ar.com.ada.learn.model.repository.RepresentativeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,9 +14,7 @@ import java.util.List;
 @Service("representativeService")
 public class RepresentativeService implements Services<RepresentativeDTO>{
 
-    private RepresentativeCycleMapper representativeCycleMapper = RepresentativeCycleMapper.MAPPER;
-
-    private RepresentativeMapper representativeMapper;
+    private RepresentativeMapper representativeMapper = RepresentativeMapper.MAPPER;
 
     @Autowired
     @Qualifier("cycleAvoidingMappingContext")
@@ -29,15 +26,15 @@ public class RepresentativeService implements Services<RepresentativeDTO>{
     @Override
     public List<RepresentativeDTO> findAll() {
         List<Representative> representativeEntityList = representativeRepository.findAll();
-        List<RepresentativeDTO> representativeDTOSList = representativeCycleMapper.toDto(representativeEntityList);
+        List<RepresentativeDTO> representativeDTOSList = representativeMapper.toDto(representativeEntityList, context);
         return representativeDTOSList;
     }
 
     @Override
     public RepresentativeDTO save(RepresentativeDTO dto) {
-        Representative representativeToSave = representativeCycleMapper.toEntity(dto);
+        Representative representativeToSave = representativeMapper.toEntity(dto, context);
         Representative representativeSaved = representativeRepository.save(representativeToSave);
-        RepresentativeDTO representativeDTOSaved = representativeMapper.toDto(representativeSaved);
+        RepresentativeDTO representativeDTOSaved = representativeMapper.toDto(representativeSaved, context);
         return representativeDTOSaved;
     }
 

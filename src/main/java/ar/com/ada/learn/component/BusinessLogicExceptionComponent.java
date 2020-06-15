@@ -21,4 +21,18 @@ public class BusinessLogicExceptionComponent {
                 apiEntityError
         );
     }
+
+    public RuntimeException getExceptionEntityNotFound(String entityName, Long id){
+        ApiEntityError apiEntityError = new ApiEntityError(
+                entityName,
+                "NotFound",
+                "The " + entityName + " with id " + id + "does not exist"
+        );
+
+        return new BusinessLogicException(
+                entityName + " does not exist",
+                HttpStatus.NOT_FOUND,
+                apiEntityError
+        );
+    }
 }

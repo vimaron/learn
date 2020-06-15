@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("/companies")
 public class CompanyController {
 
     @Autowired
@@ -22,9 +22,7 @@ public class CompanyController {
 
     @PostMapping({"", "/"})
     public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO){
-
         CompanyDTO companySaved = companyService.save(companyDTO);
-
         return ResponseEntity.ok(companySaved);
     }
 

@@ -1,6 +1,5 @@
 package ar.com.ada.learn.model.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity(name = "company")
-@Builder
 public class Company {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +21,7 @@ public class Company {
     private String name;
 
     @Column(name = "cuil", nullable = false, length = 11)
-    private Integer cuil;
+    private Long cuil;
 
     @Column(name = "address", nullable = false, length = 100)
     private String address;
@@ -48,6 +46,4 @@ public class Company {
     @JoinColumn(name = "type_of_company_id", referencedColumnName = "id",nullable = false)
     private TypeOfCompany typeOfCompany;
 
-    public Company(Long id) {
-    }
 }

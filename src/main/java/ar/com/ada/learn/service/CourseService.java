@@ -3,10 +3,13 @@ package ar.com.ada.learn.service;
 import ar.com.ada.learn.component.BusinessLogicExceptionComponent;
 import ar.com.ada.learn.model.dto.CourseDTO;
 import ar.com.ada.learn.model.entity.Course;
+import ar.com.ada.learn.model.entity.CourseMode;
+import ar.com.ada.learn.model.entity.TypeOfCourse;
 import ar.com.ada.learn.model.mapper.CourseMapper;
-import ar.com.ada.learn.model.mapper.circular.CycleAvoidingMappingContext;
-import ar.com.ada.learn.model.mapper.circular.CourseCycleMapper;
+import ar.com.ada.learn.model.mapper.CycleAvoidingMappingContext;
+import ar.com.ada.learn.model.repository.CourseModelRepository;
 import ar.com.ada.learn.model.repository.CourseRepository;
+import ar.com.ada.learn.model.repository.TypeOfCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,7 @@ import java.util.Optional;
 @Service("courseService")
 public class CourseService implements Services<CourseDTO>{
 
-    private CourseCycleMapper courseCycleMapper = CourseCycleMapper.MAPPER;
+    private CourseMapper courseMapper = CourseMapper.MAPPER;
 
     @Autowired @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
@@ -28,7 +31,11 @@ public class CourseService implements Services<CourseDTO>{
     @Autowired @Qualifier("courseRepository")
     private CourseRepository courseRepository;
 
-    private CourseMapper courseMapper;
+    @Autowired @Qualifier("typeOfCourseRepository")
+    private TypeOfCourseRepository typeOfCourseRepository;
+
+    @Autowired @Qualifier("courseModelRepository")
+    private CourseModelRepository courseModelRepository;
 
     public CourseService(CourseMapper courseMapper) {
         this.courseMapper = courseMapper;
@@ -37,16 +44,29 @@ public class CourseService implements Services<CourseDTO>{
     @Override
     public List<CourseDTO> findAll() {
         List<Course> courseEntityList = courseRepository.findAll();
-        List<CourseDTO> coursesDtoList = courseCycleMapper.toDto(courseEntityList);
+        List<CourseDTO> coursesDtoList = courseMapper.toDto(courseEntityList, context);
         return coursesDtoList;
     }
 
     @Override
     public CourseDTO save(CourseDTO dto) {
-        Course courseToSave = courseMapper.toEntity(dto);
+        Long typeOfCourseId = dto.getTypeOfCourseId();
+        TypeOfCourse typeOfCourse = typeOfCourseRepository.findById(typeOfCourseId)
+                .orElseThrow(() -> businessLogicExceptionComponent
+                        .getExceptionEntityNotFound("TypeOfCourse", typeOfCourseId));
+
+        Long courseModeId = dto.getCourseModeId();
+        CourseMode courseMode = courseModelRepository.findById(courseModeId)
+                .orElseThrow(() -> businessLogicExceptionComponent
+                        .getExceptionEntityNotFound("CourseMode", courseModeId));
+
+        Course courseToSave = courseMapper.toEntity(dto, context);
+        courseToSave.setCourseMode(courseMode);
+        courseToSave.setTypeOfCourse(typeOfCourse);
         Course courseSaved = courseRepository.save(courseToSave);
-        CourseDTO courseDtoSaved = courseMapper.toDto(courseSaved);
-        return courseDtoSaved;
+        CourseDTO courseDTOSaved = courseMapper.toDto(courseSaved, context);
+
+        return courseDTOSaved;
     }
 
     @Override
@@ -61,7 +81,7 @@ public class CourseService implements Services<CourseDTO>{
 
         if (byIdOptional.isPresent()){
             Course courseById = byIdOptional.get();
-            courseDTO = courseMapper.toDto(courseById);
+            courseDTO = courseMapper.toDto(courseById, context);
         }else {
             businessLogicExceptionComponent.throwExceptionEntityNotFound("Course", id);
 

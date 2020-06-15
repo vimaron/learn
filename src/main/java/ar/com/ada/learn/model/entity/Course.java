@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity(name = "course")
-@Builder
 public class Course {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +51,5 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private Set<StudentHasCourse> studentHasCourses;
 
-    public Course(Long id) {
-    }
+
 }

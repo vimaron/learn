@@ -2,18 +2,11 @@ package ar.com.ada.learn.model.mapper;
 
 import ar.com.ada.learn.model.dto.RepresentativeDTO;
 import ar.com.ada.learn.model.entity.Representative;
-import ar.com.ada.learn.model.mapper.circular.DataCycleMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface RepresentativeMapper extends DataCycleMapper<RepresentativeDTO, Representative> {
+    RepresentativeMapper MAPPER = Mappers.getMapper(RepresentativeMapper.class);
 
-    Representative toEntity(RepresentativeDTO dto);
-
-    RepresentativeDTO toDto(Representative entity);
-
-    default Representative fromId(Long id) {
-        if (id == null) return null;
-        return new Representative(id);
-    }
 }

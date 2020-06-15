@@ -39,6 +39,4 @@ public class SocioEconomic {
     @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private Student student;
 
-    public SocioEconomic(Long id) {
-    }
 }

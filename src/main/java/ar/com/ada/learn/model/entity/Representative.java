@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity(name = "representative")
-@Builder
 public class Representative {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +39,4 @@ public class Representative {
     @JoinColumn(name = "company_id", referencedColumnName = "id",nullable = false)
     private Company company;
 
-    public Representative(Long id) {
-    }
 }
