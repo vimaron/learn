@@ -2,8 +2,11 @@ package ar.com.ada.learn.component.data;
 
 import ar.com.ada.learn.model.entity.CompanyCategory;
 import ar.com.ada.learn.model.repository.CompanyCategoryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -14,20 +17,30 @@ import java.util.List;
 @Component
 public class CompanyCategoryLoader implements ApplicationRunner {
 
-    @Autowired @Qualifier("companyCategoryRepository")
+    private static final Logger LOGGER = LoggerFactory.getLogger(CompanyCategoryLoader.class);
+
+    @Value("${spring.application.env}")
+    private String appEnv;
+
+    @Autowired
+    @Qualifier("companyCategoryRepository")
     private CompanyCategoryRepository companyCategoryRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        List<CompanyCategory> companyCategoryList = Arrays.asList(
-                new CompanyCategory("Marketing y publicidad"),
-                new CompanyCategory("Comercio"),
-                new CompanyCategory("Metalurgica"),
-                new CompanyCategory("Servicios")
-        );
+        LOGGER.info("Environment: " + appEnv);
+        if (appEnv.equals("dev") || appEnv.equals("qa")) {
+            LOGGER.info("Loading Actor initial data...");
 
-        companyCategoryList.forEach(companyCategory -> companyCategoryRepository.save(companyCategory));
+            List<CompanyCategory> companyCategoryList = Arrays.asList(
+                    new CompanyCategory(1L, "Marketing y publicidad"),
+                    new CompanyCategory(2L, "Comercio"),
+                    new CompanyCategory(3L, "Metalurgica"),
+                    new CompanyCategory(4L, "Servicios")
+            );
 
+            companyCategoryList.forEach(companyCategory -> companyCategoryRepository.save(companyCategory));
+        }
     }
 }

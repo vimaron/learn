@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class CompanyController {
 
     @Autowired
-    @Qualifier("courseService")
+    @Qualifier("companyService")
     private CompanyService companyService;
 
     @PostMapping({"", "/"})
