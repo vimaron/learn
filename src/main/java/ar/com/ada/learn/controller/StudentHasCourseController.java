@@ -17,7 +17,7 @@ public class StudentHasCourseController {
     private StudentHasCourseService studentHasCourseService;
 
     @PutMapping({"/student/{studentId}/course/{courseId}", "/student/{studentId}/course/{courseId}/"})
-    public ResponseEntity addNewStudentTpCourse(
+    public ResponseEntity addNewStudentToCourse(
             @Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO,
             @PathVariable Long studentId, @PathVariable Long courseId){
         StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseService.save(studentHasCourseDTO, studentId, courseId);

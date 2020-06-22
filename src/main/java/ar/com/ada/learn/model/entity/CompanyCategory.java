@@ -22,7 +22,9 @@ public class CompanyCategory {
     @OneToMany(mappedBy = "companyCategory")
     private Set<Company> companies;
 
-
-
+    public CompanyCategory(Long id, String category) {
+        this.id = id;
+        this.category = category;
+    }
 
 }

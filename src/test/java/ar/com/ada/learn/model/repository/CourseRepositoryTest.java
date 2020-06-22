@@ -2,6 +2,7 @@ package ar.com.ada.learn.model.repository;
 
 import ar.com.ada.learn.model.entity.Course;
 import ar.com.ada.learn.model.entity.CourseMode;
+import ar.com.ada.learn.model.entity.TypeOfCourse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,8 +20,15 @@ class CourseRepositoryTest {
     public void whenSaveThenReturnCourseWhitId(){
         //GIVEN
 
-        Course course = new Course().builder().name("Test").price(20.0).hours(10).scholarships(5)
-                .capacity(20).description("descripcion").courseMode().typeOfCourse().build();
+        Course course = new Course()
+                .setName("Test")
+                .setPrice(20.0)
+                .setHours(10L)
+                .setScholarships(5L)
+                .setCapacity(20L)
+                .setDescription("descripcion")
+                .setCourseMode(new CourseMode("ON-LINE"))
+                .setTypeOfCourse(new TypeOfCourse("IT"));
         //WHEN
 
         //THEN

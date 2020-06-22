@@ -35,6 +35,9 @@ public class Course {
     @Column(name = "description", nullable = false, length = 200)
     private String description;
 
+    @Column(name = "status", nullable = false)
+    private String status;
+
 
     @ManyToOne
     @JoinColumn(name = "Company_id", referencedColumnName = "id", nullable = false)
@@ -52,4 +55,53 @@ public class Course {
     private Set<StudentHasCourse> studentHasCourses;
 
 
+    public Course setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public Course setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Course setPrice(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public Course setHours(Long hours) {
+        this.hours = hours;
+        return this;
+    }
+
+    public Course setScholarships(Long scholarships) {
+        this.scholarships = scholarships;
+        return this;
+    }
+
+    public Course setCapacity(Long capacity) {
+        this.capacity = capacity;
+        return this;
+    }
+
+    public Course setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Course setCompany(Company company) {
+        this.company = company;
+        return this;
+    }
+
+    public Course setCourseMode(CourseMode courseMode) {
+        this.courseMode = courseMode;
+        return this;
+    }
+
+    public Course setTypeOfCourse(TypeOfCourse typeOfCourse) {
+        this.typeOfCourse = typeOfCourse;
+        return this;
+    }
 }

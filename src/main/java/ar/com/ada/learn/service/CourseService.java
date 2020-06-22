@@ -98,4 +98,28 @@ public class CourseService implements Services<CourseDTO>{
         }
         return courseDTO;
     }
+
+    public List<CourseDTO> getAllCoursesByCategory(Long categoryId) {
+        List<Course> courseByCategoryList = courseRepository.findAllByCategory(categoryId);
+        List<CourseDTO> courseByCategoryListDTO = courseMapper.toDto(courseByCategoryList, context);
+        return courseByCategoryListDTO;
+    }
+
+    public List<CourseDTO> getAllCoursesByCompany(Long companyId){
+        List<Course> courseByCompany = courseRepository.findAllByCompany(companyId);
+        List<CourseDTO> courseByCompanyDTO = courseMapper.toDto(courseByCompany, context);
+        return courseByCompanyDTO;
+    }
+
+    public List<CourseDTO> getAllCoursesByStudentAndStatus(Long studentId, String isClosed){
+        List<Course> courseByStudentAndStatus = courseRepository.findAllByStudentAndStatus(studentId, isClosed);
+        List<CourseDTO> courseByStudentAndStatusDTO = courseMapper.toDto(courseByStudentAndStatus, context);
+        return courseByStudentAndStatusDTO;
+    }
+
+    public List<CourseDTO> getAllCoursesByCompanyAndCategory(Long companiesId, Long categoryId){
+        List<Course> coursesByCompanyAndCategory = courseRepository.findAllByCompanyAndCategory(companiesId, categoryId);
+        List<CourseDTO> coursesByCompanyAndCategoryDTO = courseMapper.toDto(coursesByCompanyAndCategory, context);
+        return coursesByCompanyAndCategoryDTO;
+    }
 }

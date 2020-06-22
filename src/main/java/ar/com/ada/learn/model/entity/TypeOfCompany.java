@@ -22,5 +22,7 @@ public class TypeOfCompany {
     @OneToMany(mappedBy = "typeOfCompany")
     private Set<Company> companies;
 
-
+    public TypeOfCompany(String type){
+        this.type=type;
+    }
 }
