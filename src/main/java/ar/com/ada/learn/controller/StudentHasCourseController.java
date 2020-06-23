@@ -1,5 +1,6 @@
 package ar.com.ada.learn.controller;
 
+import ar.com.ada.learn.model.dto.StudentCourseApplicationDTO;
 import ar.com.ada.learn.model.dto.StudentHasCourseDTO;
 import ar.com.ada.learn.service.StudentHasCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ public class StudentHasCourseController {
 
     @PutMapping({"/student/{studentId}/course/{courseId}", "/student/{studentId}/course/{courseId}/"})
     public ResponseEntity addNewStudentToCourse(
-            @Valid @RequestBody StudentHasCourseDTO studentHasCourseDTO,
+            @Valid @RequestBody StudentCourseApplicationDTO studentCourseApplicationDTO,
             @PathVariable Long studentId, @PathVariable Long courseId){
-        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseService.save(studentHasCourseDTO, studentId, courseId);
+        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseService.save(studentCourseApplicationDTO, studentId, courseId);
         return ResponseEntity.ok(studentHasCourseDTOSaved);
     }
-
 
 }

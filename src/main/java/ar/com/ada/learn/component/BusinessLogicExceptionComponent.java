@@ -2,6 +2,7 @@ package ar.com.ada.learn.component;
 
 import ar.com.ada.learn.exception.ApiEntityError;
 import ar.com.ada.learn.exception.BusinessLogicException;
+import ar.com.ada.learn.model.entity.StudentHasCourseId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,20 @@ public class BusinessLogicExceptionComponent {
         return new BusinessLogicException(
                 entityName + " does not exist",
                 HttpStatus.NOT_FOUND,
+                apiEntityError
+        );
+    }
+
+    public RuntimeException getExceptionApplicationAlreadyExists(StudentHasCourseId id) {
+        ApiEntityError apiEntityError = new ApiEntityError(
+                "CourseApplication",
+                "ApplicationAlreadyExists",
+                "The application for course id " + id.getCourseId() + " and participan id "
+                        + id.getStudentId() + "already exists"
+        );
+        return new BusinessLogicException(
+                "this application already exists",
+                HttpStatus.BAD_REQUEST,
                 apiEntityError
         );
     }

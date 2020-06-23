@@ -32,4 +32,11 @@ public class StudentHasCourse implements Serializable {
     @ManyToOne
     @MapsId("courseId")
     private Course course;
+
+
+    public StudentHasCourse(StudentHasCourseId id, Student student, Course course) {
+        this.id = id;
+        this.student = student;
+        this.course = course;
+    }
 }

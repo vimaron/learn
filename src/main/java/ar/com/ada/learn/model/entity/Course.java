@@ -38,7 +38,6 @@ public class Course {
     @Column(name = "status", nullable = false)
     private String status;
 
-
     @ManyToOne
     @JoinColumn(name = "Company_id", referencedColumnName = "id", nullable = false)
     private Company company;

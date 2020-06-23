@@ -1,6 +1,7 @@
 package ar.com.ada.learn.service;
 
 import ar.com.ada.learn.component.BusinessLogicExceptionComponent;
+import ar.com.ada.learn.model.dto.StudentCourseApplicationDTO;
 import ar.com.ada.learn.model.dto.StudentHasCourseDTO;
 import ar.com.ada.learn.model.entity.Course;
 import ar.com.ada.learn.model.entity.Student;
@@ -22,36 +23,59 @@ public class StudentHasCourseService {
 
     private StudentHasCourseMapper studentHasCourseMapper = StudentHasCourseMapper.MAPPER;
 
-    @Autowired @Qualifier("studentRepository")
+    @Autowired
+    @Qualifier("studentRepository")
     private StudentRepository studentRepository;
 
-    @Autowired @Qualifier("courseRepository")
+    @Autowired
+    @Qualifier("courseRepository")
     private CourseRepository courseRepository;
 
-    @Autowired @Qualifier("studentHasCourseRepository")
+    @Autowired
+    @Qualifier("studentHasCourseRepository")
     private StudentHasCourseRepository studentHasCourseRepository;
 
     @Autowired
     @Qualifier("cycleAvoidingMappingContext")
     private CycleAvoidingMappingContext context;
 
-    public StudentHasCourseDTO save(StudentHasCourseDTO dto, Long studentId, Long courseId){
+    public StudentHasCourseDTO save(StudentCourseApplicationDTO dto, Long studentId, Long courseId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> businessLogicExceptionComponent.getExceptionEntityNotFound("Student", studentId));
 
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> businessLogicExceptionComponent.getExceptionEntityNotFound("Course", courseId));
 
-        StudentHasCourseId studentHasCourseId = new StudentHasCourseId()
-                .setStudentId(studentId)
-                .setCourseId(courseId);
-        StudentHasCourse studentHasCourseToSave = studentHasCourseMapper.toEntity(dto, context);
-        studentHasCourseToSave.setId(studentHasCourseId);
-        studentHasCourseToSave.setCourse(course);
-        studentHasCourseToSave.setStudent(student);
-        StudentHasCourse studentHasCourseSaved = studentHasCourseRepository.save(studentHasCourseToSave);
-        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseMapper.toDto(studentHasCourseSaved, context);
+        StudentHasCourseId id = new StudentHasCourseId().setCourseId(course.getId()).setStudentId(student.getId());
+
+        studentHasCourseRepository.findById(id).ifPresent(studentHasCourse -> {
+            throw businessLogicExceptionComponent.getExceptionApplicationAlreadyExists(id);
+        });
+
+        StudentHasCourse studentHasCourseToSave = new StudentHasCourse()
+                .setId(id)
+                .setStudent(student)
+                .setCourse(course);
+
+
+        StudentHasCourseDTO studentHasCourseDTOSaved;
+        if (dto.getScholarship()){
+            studentHasCourseDTOSaved = this.saveDirectApplication(studentHasCourseToSave);
+
+        }else {
+            studentHasCourseDTOSaved = this.saveScholarshipApplication(studentHasCourseToSave);
+        }
+
         return studentHasCourseDTOSaved;
     }
 
+
+    private StudentHasCourseDTO saveDirectApplication(StudentHasCourse studentHasCourseToSave){
+        return null;
+    }
+
+    private StudentHasCourseDTO saveScholarshipApplication(StudentHasCourse studentHasCourseToSave){
+        return null;
+    }
 }
+
