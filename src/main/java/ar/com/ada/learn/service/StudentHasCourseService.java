@@ -89,7 +89,13 @@ public class StudentHasCourseService {
 
 
     private StudentHasCourseDTO saveScholarshipApplication(StudentHasCourse studentHasCourseToSave){
-        return null;
+        studentHasCourseToSave.setAdjType("scholarship");
+
+        StudentHasCourse studentHasCourseSave = studentHasCourseRepository.save(studentHasCourseToSave);
+        StudentHasCourseDTO studentHasCourseSaved = studentHasCourseMapper.toDto(studentHasCourseSave, context);
+
+        return studentHasCourseSaved;
     }
+    
 }
 
