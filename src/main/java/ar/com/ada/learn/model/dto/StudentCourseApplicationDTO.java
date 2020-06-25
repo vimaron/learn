@@ -12,10 +12,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class StudentCourseApplicationDTO implements Serializable {
 
-    @NotNull(message = "Scholaship is required")
-    private boolean scholarship;
+    @NotNull(message = "AdjType is required")
+    private String adjType;
 
-    public boolean getScholarship() {
-        return scholarship;
-    }
+
+
 }

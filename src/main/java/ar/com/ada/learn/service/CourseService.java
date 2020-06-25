@@ -72,12 +72,20 @@ public class CourseService implements Services<CourseDTO>{
 
         Course courseToSave = courseMapper.toEntity(dto, context);
         courseToSave.setCourseMode(courseMode);
+        courseToSave.setCompany(company);
         courseToSave.setTypeOfCourse(typeOfCourse);
+
+        int directPurchaseCounter = dto.getCapacity() - dto.getScholarships();
+        courseToSave.setDirectPurchaseCounter(directPurchaseCounter);
+        courseToSave.setScholarships(dto.getScholarships());
+
         Course courseSaved = courseRepository.save(courseToSave);
         CourseDTO courseDTOSaved = courseMapper.toDto(courseSaved, context);
 
         return courseDTOSaved;
     }
+
+
 
     @Override
     public void delete(Long id) {

@@ -59,7 +59,7 @@ public class StudentHasCourseService {
 
 
         StudentHasCourseDTO studentHasCourseDTOSaved;
-        if (dto.getScholarship()){
+        if (dto.getAdjType() == "Direct"){
             studentHasCourseDTOSaved = this.saveDirectApplication(studentHasCourseToSave);
 
         }else {
@@ -71,8 +71,22 @@ public class StudentHasCourseService {
 
 
     private StudentHasCourseDTO saveDirectApplication(StudentHasCourse studentHasCourseToSave){
-        return null;
+        Integer counter = studentHasCourseToSave.getCourse().getDirectPurchaseCounter();
+
+        if (counter == 0)
+            throw businessLogicExceptionComponent.getExceptionSoldOut(studentHasCourseToSave.getCourse().getName());
+
+        studentHasCourseToSave.setAdjType("Direct");
+        studentHasCourseToSave.setStatus(true);
+        studentHasCourseToSave.getCourse().setDirectPurchaseCounter(counter - 1);
+
+        StudentHasCourse studentHasCourseSave = studentHasCourseRepository.save(studentHasCourseToSave);
+        StudentHasCourseDTO studentHasCourseDTOSaved = studentHasCourseMapper.toDto(studentHasCourseSave, context);
+
+
+        return studentHasCourseDTOSaved;
     }
+
 
     private StudentHasCourseDTO saveScholarshipApplication(StudentHasCourse studentHasCourseToSave){
         return null;

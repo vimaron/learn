@@ -20,7 +20,7 @@ public class StudentHasCourse implements Serializable {
     private String adjType;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private Boolean status;
 
     @Column(name = "percentage", nullable = false)
     private Long percentage;
@@ -34,9 +34,18 @@ public class StudentHasCourse implements Serializable {
     private Course course;
 
 
-    public StudentHasCourse(StudentHasCourseId id, Student student, Course course) {
+    public StudentHasCourse setId(StudentHasCourseId id) {
         this.id = id;
-        this.student = student;
-        this.course = course;
+        return this;
     }
+
+    public StudentHasCourse setStudent(Student student) {
+        this.student = student;
+        return this;
+    }
+    public StudentHasCourse setCourse(Course course) {
+        this.course = course;
+        return this;
+    }
+
 }

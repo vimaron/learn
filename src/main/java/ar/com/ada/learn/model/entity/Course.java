@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 
 @Getter
@@ -27,10 +28,16 @@ public class Course {
     private Long hours;
 
     @Column(name = "scholarships", nullable = false)
-    private Long scholarships ;
+    private Integer scholarships ;
 
     @Column(name = "capacity", nullable = false)
-    private Long capacity;
+    private Integer capacity;
+
+    @Column(nullable = false, name = "direct_purchase_counter")
+    private Integer directPurchaseCounter;
+
+    @Column(nullable = false, name = "scholarship_counter")
+    private Integer scholarshipCounter;
 
     @Column(name = "description", nullable = false, length = 200)
     private String description;
@@ -74,12 +81,12 @@ public class Course {
         return this;
     }
 
-    public Course setScholarships(Long scholarships) {
+    public Course setScholarships(Integer scholarships) {
         this.scholarships = scholarships;
         return this;
     }
 
-    public Course setCapacity(Long capacity) {
+    public Course setCapacity(Integer capacity) {
         this.capacity = capacity;
         return this;
     }
