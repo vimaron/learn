@@ -24,8 +24,8 @@ class CourseRepositoryTest {
                 .setName("Test")
                 .setPrice(20.0)
                 .setHours(10L)
-                .setScholarships(5L)
-                .setCapacity(20L)
+                .setScholarships(5)
+                .setCapacity(20)
                 .setDescription("descripcion")
                 .setCourseMode(new CourseMode("ON-LINE"))
                 .setTypeOfCourse(new TypeOfCourse("IT"));

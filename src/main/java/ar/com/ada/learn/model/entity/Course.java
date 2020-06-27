@@ -1,6 +1,5 @@
 package ar.com.ada.learn.model.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,16 +26,19 @@ public class Course {
     private Long hours;
 
     @Column(name = "scholarships", nullable = false)
-    private Long scholarships ;
+    private Integer scholarships ;
 
     @Column(name = "capacity", nullable = false)
-    private Long capacity;
+    private Integer capacity;
+
+    @Column(nullable = false, name = "direct_purchase_counter")
+    private Integer directPurchaseCounter;
+
+    @Column(nullable = false, name = "scholarship_counter")
+    private Integer scholarshipCounter;
 
     @Column(name = "description", nullable = false, length = 200)
     private String description;
-
-    @Column(name = "status", nullable = false)
-    private String status;
 
 
     @ManyToOne
@@ -55,11 +57,6 @@ public class Course {
     private Set<StudentHasCourse> studentHasCourses;
 
 
-    public Course setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
     public Course setName(String name) {
         this.name = name;
         return this;
@@ -75,12 +72,12 @@ public class Course {
         return this;
     }
 
-    public Course setScholarships(Long scholarships) {
+    public Course setScholarships(Integer scholarships) {
         this.scholarships = scholarships;
         return this;
     }
 
-    public Course setCapacity(Long capacity) {
+    public Course setCapacity(Integer capacity) {
         this.capacity = capacity;
         return this;
     }

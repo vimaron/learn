@@ -33,7 +33,16 @@ public class CourseDTO implements Serializable {
     private TypeOfCourseDTO typeOfCourse;
 
     @NotBlank(message = "scholarships is required")
-    private Long scholarships ;
+    private Integer scholarships ;
+
+    @NotBlank(message = "direct purchase counter is required")
+    private Integer directPurchaseCounter;
+
+    @NotBlank(message = "scholarship counter is required")
+    private Integer scholarshipCounter;
+
+    @NotBlank(message = "capacity is required")
+    private Integer capacity;
 
     @NotNull(message = "typeOfCourseId is required")
     private Long typeOfCourseId;
@@ -44,12 +53,7 @@ public class CourseDTO implements Serializable {
     @NotNull(message = "companyId is required")
     private Long companyId;
 
-    @NotBlank(message = "capacity is required")
-    private Long capacity;
-
     private Set<StudentDTO> students;
-
-    private String status;
 
     private CompanyDTO company;
 

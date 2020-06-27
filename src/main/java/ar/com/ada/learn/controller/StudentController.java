@@ -28,7 +28,7 @@ public class StudentController {
         return ResponseEntity.ok(all);
     }
 
-    @PostMapping({"", "/"})
+    @PostMapping({"/socioEconomic", "/socioEconomic/"})
     public ResponseEntity addNewSocioEconomic(@Valid @RequestBody SocioeconomicDTO socioeconomicDTO){
         SocioeconomicDTO socioeconomicDTOSaved = socioEconomicService.save(socioeconomicDTO);
         return ResponseEntity.ok(socioeconomicDTOSaved);
