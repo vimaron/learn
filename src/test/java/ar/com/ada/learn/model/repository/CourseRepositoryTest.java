@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotEquals;
 
 
 @SpringBootTest
@@ -36,12 +40,16 @@ class CourseRepositoryTest {
         //THEN
 
         assertNotNull(saved.getId());
-        assertNotNull(saved.getName());
 
     }
 
     @Test
     void findAllByCategory() {
+        Long categoryId = 1L;
+
+        List<Course> findByCategory = courseRepository.findAllByCategory(categoryId);
+
+        assertEquals();
 
     }
 
