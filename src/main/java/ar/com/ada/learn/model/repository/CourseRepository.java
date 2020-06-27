@@ -26,8 +26,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
 
 
-    @Query(value = "SELECT * FROM Course co WHERE co.Company_id = :companyId AND c.Category_id = :categoryId")
+    @Query(value = "SELECT * FROM Course co WHERE co.Company_id = :companyId AND c.Category_id = :categoryId", nativeQuery = true)
     Page<Course> findAllByCompanyAndCategory(@Param("companyId") Long companyId, @Param("categoryId") Long categoryId, Pageable pageable);
-    //Optional<Course> findByType(TypeOfCourse type);
+
 
 }
