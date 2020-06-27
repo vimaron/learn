@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+
 
 @SpringBootTest
 class CourseRepositoryTest {
@@ -30,8 +31,29 @@ class CourseRepositoryTest {
                 .setCourseMode(new CourseMode("ON-LINE"))
                 .setTypeOfCourse(new TypeOfCourse("IT"));
         //WHEN
+        Course saved = courseRepository.save(course);
 
         //THEN
 
+        assertNotNull(saved.getId());
+        assertNotNull(saved.getName());
+
+    }
+
+    @Test
+    void findAllByCategory() {
+
+    }
+
+    @Test
+    void findAllByCompany() {
+    }
+
+    @Test
+    void findAllByStudentAndStatus() {
+    }
+
+    @Test
+    void findAllByCompanyAndCategory() {
     }
 }
