@@ -74,6 +74,10 @@ public class CourseService implements Services<CourseDTO>{
                         .getExceptionEntityNotFound("CourseMode", courseModeId));
 
         Course courseToSave = courseMapper.toEntity(dto, context);
+        courseToSave.setCompany(company);
+        courseToSave.setTypeOfCourse(typeOfCourse);
+        courseToSave.setCourseMode(courseMode);
+
         courseToSave.setCourseMode(courseMode);
         courseToSave.setCompany(company);
         courseToSave.setTypeOfCourse(typeOfCourse);
