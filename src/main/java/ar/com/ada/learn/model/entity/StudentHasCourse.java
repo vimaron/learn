@@ -22,8 +22,11 @@ public class StudentHasCourse implements Serializable {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
+    @Column(name = "finished", nullable = false)
+    private Boolean finished;
+
     @Column(name = "percentage", nullable = false)
-    private Long percentage;
+    private Integer percentage;
 
     @ManyToOne
     @MapsId("studentId")

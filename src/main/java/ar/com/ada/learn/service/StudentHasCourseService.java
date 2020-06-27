@@ -1,6 +1,8 @@
 package ar.com.ada.learn.service;
 
 import ar.com.ada.learn.component.BusinessLogicExceptionComponent;
+import ar.com.ada.learn.model.dto.CourseHasFinishedDTO;
+import ar.com.ada.learn.model.dto.ScholarshipApprovalDTO;
 import ar.com.ada.learn.model.dto.StudentCourseApplicationDTO;
 import ar.com.ada.learn.model.dto.StudentHasCourseDTO;
 import ar.com.ada.learn.model.entity.Course;
@@ -96,6 +98,46 @@ public class StudentHasCourseService {
 
         return studentHasCourseSaved;
     }
-    
+
+    public StudentHasCourseDTO scholarshipApproval(ScholarshipApprovalDTO dto, Long courseId, Long studentId){
+        StudentHasCourseId id = new StudentHasCourseId().setCourseId(courseId).setStudentId(studentId);
+        StudentHasCourse studentHasCourse = studentHasCourseRepository
+                .findById(id)
+                .orElseThrow(() -> businessLogicExceptionComponent.throwExceptionEntityNotFound("StudentHasCourse", id));
+        Integer scholarshipCounter = studentHasCourse.getCourse().getScholarshipCounter();
+
+        if (scholarshipCounter == 0){
+            throw  businessLogicExceptionComponent.getExceptionSoldOut(studentHasCourse.getCourse().getName());
+        }
+        if (dto.getApproved()){
+            studentHasCourse.setStatus(dto.getApproved());
+            studentHasCourse.setPercentage(dto.getScholarshipPercentage());
+            studentHasCourse.getCourse().setScholarshipCounter(scholarshipCounter - 1);
+        }else {
+            studentHasCourse.setStatus(dto.getApproved());
+            studentHasCourse.setPercentage(0);
+        }
+
+        StudentHasCourseDTO studentHasCourseDTOUpdated = studentHasCourseMapper.toDto(studentHasCourse, context);
+
+        return studentHasCourseDTOUpdated;
+    }
+
+
+    public StudentHasCourseDTO courseFinished(CourseHasFinishedDTO dto, Long courseId, Long studentId){
+        StudentHasCourseId id = new StudentHasCourseId().setCourseId(courseId).setStudentId(studentId);
+        StudentHasCourse studentHasCourse = studentHasCourseRepository.findById(id)
+                .orElseThrow(() -> businessLogicExceptionComponent.throwExceptionEntityNotFound("StudentHasCourse", id));
+
+        if (!studentHasCourse.getFinished() && dto.getCourseFinished()){
+            studentHasCourse.setFinished(dto.getCourseFinished());
+        }
+
+        StudentHasCourseDTO studentHasCourseDTOUpdated = studentHasCourseMapper.toDto(studentHasCourse, context);
+
+        return studentHasCourseDTOUpdated;
+    }
+
+
 }
 
