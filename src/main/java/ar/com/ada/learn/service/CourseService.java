@@ -14,6 +14,9 @@ import ar.com.ada.learn.model.repository.CourseRepository;
 import ar.com.ada.learn.model.repository.TypeOfCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -107,27 +110,42 @@ public class CourseService implements Services<CourseDTO>{
         return courseDTO;
     }
 
-    public List<CourseDTO> getAllCoursesByCategory(Long categoryId) {
-        List<Course> courseByCategoryList = courseRepository.findAllByCategory(categoryId);
-        List<CourseDTO> courseByCategoryListDTO = courseMapper.toDto(courseByCategoryList, context);
+    public List<CourseDTO> getAllCoursesByCategory(Long categoryId, Integer page) {
+        Page<Course> courseByCategoryList = courseRepository
+                .findAllByCategory(categoryId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+
+        List<Course> allByCategory = courseByCategoryList.getContent();
+        List<CourseDTO> courseByCategoryListDTO = courseMapper.toDto(allByCategory, context);
         return courseByCategoryListDTO;
     }
 
-    public List<CourseDTO> getAllCoursesByCompany(Long companyId){
-        List<Course> courseByCompany = courseRepository.findAllByCompany(companyId);
-        List<CourseDTO> courseByCompanyDTO = courseMapper.toDto(courseByCompany, context);
+
+
+    public List<CourseDTO> getAllCoursesByCompany(Long companyId, Integer page){
+        Page<Course> courseByCompany = courseRepository
+                .findAllByCompany(companyId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+        List<Course> allByCompany = courseByCompany.getContent();
+        List<CourseDTO> courseByCompanyDTO = courseMapper.toDto(allByCompany, context);
         return courseByCompanyDTO;
     }
 
-    public List<CourseDTO> getAllCoursesByStudentAndStatus(Long studentId, String isClosed){
-        List<Course> courseByStudentAndStatus = courseRepository.findAllByStudentAndStatus(studentId, isClosed);
-        List<CourseDTO> courseByStudentAndStatusDTO = courseMapper.toDto(courseByStudentAndStatus, context);
-        return courseByStudentAndStatusDTO;
-    }
 
-    public List<CourseDTO> getAllCoursesByCompanyAndCategory(Long companiesId, Long categoryId){
-        List<Course> coursesByCompanyAndCategory = courseRepository.findAllByCompanyAndCategory(companiesId, categoryId);
-        List<CourseDTO> coursesByCompanyAndCategoryDTO = courseMapper.toDto(coursesByCompanyAndCategory, context);
+    public List<CourseDTO> getAllCoursesByCompanyAndCategory(Long companyId, Long categoryId, Integer page){
+        Page<Course> coursesByCompanyAndCategory = courseRepository.
+                findAllByCompanyAndCategory(companyId, categoryId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+
+        List<Course> allByCompanyCategory = coursesByCompanyAndCategory.getContent();
+        List<CourseDTO> coursesByCompanyAndCategoryDTO = courseMapper.toDto(allByCompanyCategory, context);
         return coursesByCompanyAndCategoryDTO;
     }
+
+
+    public List<CourseDTO> getAllCoursesByStudentAndStatus(Boolean finished, Integer page){
+        Page<Course> courseByStudentAndStatus = courseRepository.
+                findAllByStudentAndStatus(Boolean.valueOf(finished), PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+        List<Course> courseByStudentStatus = courseByStudentAndStatus.getContent();
+        List<CourseDTO> courseByStudentStatusDTO = courseMapper.toDto(courseByStudentStatus, context);
+        return courseByStudentStatusDTO;
+    }
+
 }

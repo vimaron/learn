@@ -1,5 +1,6 @@
 package ar.com.ada.learn.service;
 
+import antlr.collections.impl.LList;
 import ar.com.ada.learn.component.BusinessLogicExceptionComponent;
 import ar.com.ada.learn.model.dto.CourseHasFinishedDTO;
 import ar.com.ada.learn.model.dto.ScholarshipApprovalDTO;
@@ -17,6 +18,9 @@ import ar.com.ada.learn.model.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("studentHasCourseService")
 public class StudentHasCourseService {
@@ -137,6 +141,7 @@ public class StudentHasCourseService {
 
         return studentHasCourseDTOUpdated;
     }
+
 
 
 }

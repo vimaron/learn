@@ -55,8 +55,6 @@ public class CourseDTO implements Serializable {
 
     private Set<StudentDTO> students;
 
-    private String status;
-
     private CompanyDTO company;
 
     @NotBlank(message = "description is required")

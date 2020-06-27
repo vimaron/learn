@@ -1,12 +1,10 @@
 package ar.com.ada.learn.model.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Set;
 
 @Getter
@@ -42,8 +40,6 @@ public class Course {
     @Column(name = "description", nullable = false, length = 200)
     private String description;
 
-    @Column(name = "status", nullable = false)
-    private String status;
 
     @ManyToOne
     @JoinColumn(name = "Company_id", referencedColumnName = "id", nullable = false)
@@ -60,11 +56,6 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private Set<StudentHasCourse> studentHasCourses;
 
-
-    public Course setStatus(String status) {
-        this.status = status;
-        return this;
-    }
 
     public Course setName(String name) {
         this.name = name;
