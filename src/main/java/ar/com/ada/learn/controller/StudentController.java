@@ -34,7 +34,7 @@ public class StudentController {
     public ResponseEntity addNewSocioEconomic(@Valid @RequestBody SocioeconomicDTO socioeconomicDTO) throws URISyntaxException {
         SocioeconomicDTO socioeconomicDTOSaved = socioEconomicService.save(socioeconomicDTO);
         return ResponseEntity
-                .created(new URI("/socioEconomy/" + socioeconomicDTOSaved.getId()))
+                .created(new URI("/socioEconomics/" + socioeconomicDTOSaved.getId()))
                 .body(socioeconomicDTOSaved);
     }
 

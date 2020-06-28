@@ -37,5 +37,48 @@ public class SocioeconomicDTO implements Serializable {
 
     private StudentDTO student;
 
+    public SocioeconomicDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
+    public SocioeconomicDTO setStudy(Boolean study) {
+        this.study = study;
+        return this;
+    }
+
+    public SocioeconomicDTO setJob(Boolean job) {
+        this.job = job;
+        return this;
+    }
+
+    public SocioeconomicDTO setIncome(Boolean income) {
+        this.income = income;
+        return this;
+    }
+
+    public SocioeconomicDTO setMonthlyIncome(Double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
+        return this;
+    }
+
+    public SocioeconomicDTO setInChargeOfFamily(Boolean inChargeOfFamily) {
+        this.inChargeOfFamily = inChargeOfFamily;
+        return this;
+    }
+
+    public SocioeconomicDTO setStudentId(Long studentId) {
+        this.studentId = studentId;
+        return this;
+    }
+
+    public SocioeconomicDTO setFamily(Integer family) {
+        this.family = family;
+        return this;
+    }
+
+    public SocioeconomicDTO setStudent(StudentDTO student) {
+        this.student = student;
+        return this;
+    }
 }

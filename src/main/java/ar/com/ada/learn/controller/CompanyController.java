@@ -5,6 +5,7 @@ import ar.com.ada.learn.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,9 @@ public class CompanyController {
     @Qualifier("companyService")
     private CompanyService companyService;
 
+
     @PostMapping({"", "/"})
+ //   @PreAuthorize("has role ('ADMIN')")
     public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         CompanyDTO companySaved = companyService.save(companyDTO);
         return ResponseEntity
