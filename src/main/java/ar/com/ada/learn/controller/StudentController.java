@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -29,15 +31,18 @@ public class StudentController {
     }
 
     @PostMapping({"/socioEconomic", "/socioEconomic/"})
-    public ResponseEntity addNewSocioEconomic(@Valid @RequestBody SocioeconomicDTO socioeconomicDTO){
+    public ResponseEntity addNewSocioEconomic(@Valid @RequestBody SocioeconomicDTO socioeconomicDTO) throws URISyntaxException {
         SocioeconomicDTO socioeconomicDTOSaved = socioEconomicService.save(socioeconomicDTO);
-        return ResponseEntity.ok(socioeconomicDTOSaved);
+        return ResponseEntity
+                .created(new URI("/socioEconomy/" + socioeconomicDTOSaved.getId()))
+                .body(socioeconomicDTOSaved);
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity addNewStudent(@Valid @RequestBody StudentDTO studentDto){
+    public ResponseEntity addNewStudent(@Valid @RequestBody StudentDTO studentDto) throws URISyntaxException {
         StudentDTO studentDTOSaved = studentService.save(studentDto);
-        return ResponseEntity.ok(studentDTOSaved);
+        return ResponseEntity.created( new URI("/students/" + studentDTOSaved.getId()))
+                .body(studentDTOSaved);
     }
 
 

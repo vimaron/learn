@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/companies")
@@ -21,9 +23,11 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping({"", "/"})
-    public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO){
+    public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         CompanyDTO companySaved = companyService.save(companyDTO);
-        return ResponseEntity.ok(companySaved);
+        return ResponseEntity
+                .created(new URI("/compnies/" + companySaved.getId()))
+                .body(companySaved);
     }
 
 }

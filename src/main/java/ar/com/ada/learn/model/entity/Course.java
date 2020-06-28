@@ -101,4 +101,14 @@ public class Course {
         this.typeOfCourse = typeOfCourse;
         return this;
     }
+
+    public Course setDirectPurchaseCounter(Integer directPurchaseCounter) {
+        this.directPurchaseCounter = directPurchaseCounter;
+        return this;
+    }
+
+    public Course setScholarshipCounter(Integer scholarshipCounter) {
+        this.scholarshipCounter = scholarshipCounter;
+        return this;
+    }
 }
