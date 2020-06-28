@@ -14,19 +14,19 @@ public class SocioeconomicDTO implements Serializable {
 
     private Long id;
 
-    @NotBlank(message = "study is required")
+    @NotNull(message = "study is required")
     private Boolean study;
 
-    @NotBlank(message = "job is required")
+    @NotNull(message = "job is required")
     private Boolean job;
 
-    @NotBlank(message = "income is required")
+    @NotNull(message = "income is required")
     private Boolean income;
 
     @NotNull(message = "monthly income is required")
     private Double monthlyIncome;
 
-    @NotBlank(message = "famiy in charge is required")
+    @NotNull(message = "famiy in charge is required")
     private Boolean inChargeOfFamily;
 
     @NotNull(message = "studentId is required")
