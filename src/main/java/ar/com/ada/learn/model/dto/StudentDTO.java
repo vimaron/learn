@@ -28,4 +28,29 @@ public class StudentDTO implements Serializable {
 
     private Set<CourseDTO> courses;
     private SocioeconomicDTO socioeconomic;
+
+    public StudentDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public StudentDTO setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public StudentDTO setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public StudentDTO setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public StudentDTO setAddress(String address) {
+        this.address = address;
+        return this;
+    }
 }

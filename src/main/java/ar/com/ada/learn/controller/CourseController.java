@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -32,11 +34,14 @@ public class CourseController {
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO){
+    //   @PreAuthorize("has role ('MANAGER')")
+    public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
 
         CourseDTO courseSaved = courseService.save(courseDTO);
 
-        return ResponseEntity.ok(courseSaved);
+        return ResponseEntity
+                .created(new URI("/courses/" + courseSaved.getId()))
+                .body(courseSaved);
     }
 
 }

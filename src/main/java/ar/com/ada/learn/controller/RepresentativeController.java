@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -24,10 +26,12 @@ public class RepresentativeController {
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity addNewRepresentative(@Valid @RequestBody RepresentativeDTO representativeDTO){
+    public ResponseEntity addNewRepresentative(@Valid @RequestBody RepresentativeDTO representativeDTO) throws URISyntaxException {
 
         RepresentativeDTO representativeSaved = representativeService.save(representativeDTO);
 
-        return ResponseEntity.ok(representativeSaved);
+        return ResponseEntity
+                .created(new URI("/representative/" + representativeSaved.getId()))
+                .body(representativeSaved);
     }
 }
