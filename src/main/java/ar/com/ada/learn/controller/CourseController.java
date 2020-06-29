@@ -34,6 +34,7 @@ public class CourseController {
     }
 
     @PostMapping({"", "/"})
+    //   @PreAuthorize("has role ('MANAGER')")
     public ResponseEntity addNewCourse(@Valid @RequestBody CourseDTO courseDTO) throws URISyntaxException {
 
         CourseDTO courseSaved = courseService.save(courseDTO);

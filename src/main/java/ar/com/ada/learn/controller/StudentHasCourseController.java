@@ -29,6 +29,7 @@ public class StudentHasCourseController {
 
 
     @PostMapping({"/student/{studentId}/course/{courseId}/approval", "/student/{studentId}/course/{courseId}/approval/"})
+    //   @PreAuthorize("has role ('ADMIN')")
     public ResponseEntity scholarshipApproval(@Valid @RequestBody ScholarshipApprovalDTO scholarshipApprovalDTO,
                                               @PathVariable Long courseId, @PathVariable Long studentId){
         StudentHasCourseDTO studentHasCourseDTOUpdated = studentHasCourseService
@@ -38,6 +39,7 @@ public class StudentHasCourseController {
     }
 
     @PostMapping({"/student/{studentId}/course/{courseId}/finished", "/student/{studentId}/course/{courseId}/finished/"})
+    //   @PreAuthorize("has role ('ADMIN')")
     public ResponseEntity finishedCourseDTO(@Valid @RequestBody CourseHasFinishedDTO courseHasFinishedDTO,
                                             @PathVariable Long courseId, @PathVariable Long studentId){
         StudentHasCourseDTO studentHasCourseDTOUpdated = studentHasCourseService.courseFinished(courseHasFinishedDTO, courseId, studentId);

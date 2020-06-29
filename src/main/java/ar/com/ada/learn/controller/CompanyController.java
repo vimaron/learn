@@ -26,7 +26,7 @@ public class CompanyController {
 
     @PostMapping({"", "/"})
  //   @PreAuthorize("has role ('ADMIN')")
-    public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
+    public ResponseEntity addNewCompany(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         CompanyDTO companySaved = companyService.save(companyDTO);
         return ResponseEntity
                 .created(new URI("/compnies/" + companySaved.getId()))
