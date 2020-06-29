@@ -2,16 +2,20 @@ package ar.com.ada.learn.model.mapper;
 
 import ar.com.ada.learn.model.dto.CourseDTO;
 import ar.com.ada.learn.model.entity.Course;
-import ar.com.ada.learn.model.mapper.circular.DataCycleMapper;
+import org.mapstruct.Context;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
+@Mapper(componentModel = "spring", uses = {})
 public interface CourseMapper extends DataCycleMapper<CourseDTO, Course> {
+    CourseMapper MAPPER = Mappers.getMapper(CourseMapper.class);
 
-    Course toEntity(CourseDTO dto);
-
-    CourseDTO toDto(Course entity);
-
-    default Course fromId(Long id){
-        if (id == null) return null;
-        return new Course(id);
-    }
+    @InheritInverseConfiguration
+    @Mapping(target = "typeOfCourseId", ignore = true)
+    @Mapping(target = "courseModeId", ignore = true)
+    @Mapping(target = "companyId", ignore = true)
+    CourseDTO toDto(Course entity, @Context CycleAvoidingMappingContext context);
 }
+

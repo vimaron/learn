@@ -1,4 +1,4 @@
-package ar.com.ada.learn.model.mapper.circular;
+package ar.com.ada.learn.model.mapper;
 
 import org.mapstruct.Context;
 import org.mapstruct.InheritInverseConfiguration;
@@ -15,5 +15,5 @@ public interface DataCycleMapper<D, E> {
     D toDto(E entity, @Context CycleAvoidingMappingContext context);
 
     @InheritInverseConfiguration
-    List<D> toDto(List<E> entityList);
+    List<D> toDto(List<E> entityList, @Context CycleAvoidingMappingContext context);
 }

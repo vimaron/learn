@@ -1,9 +1,6 @@
 package ar.com.ada.learn.model.entity;
 
-import ar.com.ada.learn.model.dto.CompanyDTO;
-import ar.com.ada.learn.model.dto.CourseModeDTO;
-import ar.com.ada.learn.model.dto.StudentDTO;
-import ar.com.ada.learn.model.dto.TypeOfCourseDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,6 +51,5 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private Set<StudentHasCourse> studentHasCourses;
 
-    public Course(Long id) {
-    }
+
 }

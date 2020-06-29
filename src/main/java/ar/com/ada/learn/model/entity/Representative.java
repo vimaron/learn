@@ -1,6 +1,7 @@
 package ar.com.ada.learn.model.entity;
 
 import ar.com.ada.learn.model.dto.CompanyDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,4 +38,5 @@ public class Representative {
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id",nullable = false)
     private Company company;
+
 }

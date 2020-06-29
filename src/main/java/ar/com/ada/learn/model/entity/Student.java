@@ -1,5 +1,6 @@
 package ar.com.ada.learn.model.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,4 +40,5 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     private Set<StudentHasCourse> studentHasCourses;
+
 }

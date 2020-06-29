@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
-public class RepresentativeDTO {
+public class RepresentativeDTO implements Serializable {
 
     private Long id;
 
@@ -27,6 +29,9 @@ public class RepresentativeDTO {
 
     @NotBlank(message = "identification is required")
     private Integer identification;
+
+    @NotNull(message = "companyId is required")
+    private Long companyId;
 
     private String identificationType;
     private CompanyDTO company;

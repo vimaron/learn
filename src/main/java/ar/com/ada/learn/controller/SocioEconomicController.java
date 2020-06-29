@@ -1,7 +1,7 @@
 package ar.com.ada.learn.controller;
 
-import ar.com.ada.learn.model.dto.CompanyDTO;
-import ar.com.ada.learn.service.CompanyService;
+import ar.com.ada.learn.model.dto.SocioeconomicDTO;
+import ar.com.ada.learn.service.SocioEconomicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/companies")
-public class CompanyController {
+@RequestMapping("/socioEconomics")
+public class SocioEconomicController {
 
-    @Autowired
-    @Qualifier("courseService")
-    private CompanyService companyService;
+    @Autowired @Qualifier("socioEconomicService")
+    private SocioEconomicService socioEconomicService;
 
     @PostMapping({"", "/"})
-    public ResponseEntity addNewCourse(@Valid @RequestBody CompanyDTO companyDTO){
-        CompanyDTO companySaved = companyService.save(companyDTO);
-        return ResponseEntity.ok(companySaved);
+    public ResponseEntity addNewSocioEconomic(@Valid @RequestBody SocioeconomicDTO socioeconomicDTO){
+        SocioeconomicDTO socioeconomicDTOSaved = socioEconomicService.save(socioeconomicDTO);
+        return ResponseEntity.ok(socioeconomicDTOSaved);
     }
-
 }
