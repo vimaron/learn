@@ -1,7 +1,6 @@
 package ar.com.ada.learn.model.entity;
 
 
-import ar.com.ada.learn.model.dto.StudentDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,5 +37,46 @@ public class SocioEconomic {
     @OneToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id", nullable = false)
     private Student student;
+
+    public SocioEconomic setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public SocioEconomic setStudy(Boolean study) {
+        this.study = study;
+        return this;
+    }
+
+    public SocioEconomic setJob(Boolean job) {
+        this.job = job;
+        return this;
+    }
+
+    public SocioEconomic setIncome(Boolean income) {
+        this.income = income;
+        return this;
+    }
+
+    public SocioEconomic setMonthlyIncome(Double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
+        return this;
+    }
+
+    public SocioEconomic setInChargeOfFamily(Boolean inChargeOfFamily) {
+        this.inChargeOfFamily = inChargeOfFamily;
+        return this;
+    }
+
+    public SocioEconomic setFamily(Integer family) {
+        this.family = family;
+        return this;
+    }
+
+    public SocioEconomic setStudent(Student student){
+        this.student = student;
+        return this;
+    }
+
 
 }

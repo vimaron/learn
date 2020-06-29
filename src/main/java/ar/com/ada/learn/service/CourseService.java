@@ -14,6 +14,9 @@ import ar.com.ada.learn.model.repository.CourseRepository;
 import ar.com.ada.learn.model.repository.TypeOfCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,13 +74,25 @@ public class CourseService implements Services<CourseDTO>{
                         .getExceptionEntityNotFound("CourseMode", courseModeId));
 
         Course courseToSave = courseMapper.toEntity(dto, context);
-        courseToSave.setCourseMode(courseMode);
+        courseToSave.setCompany(company);
         courseToSave.setTypeOfCourse(typeOfCourse);
+        courseToSave.setCourseMode(courseMode);
+
+        courseToSave.setCourseMode(courseMode);
+        courseToSave.setCompany(company);
+        courseToSave.setTypeOfCourse(typeOfCourse);
+
+        int directPurchaseCounter = dto.getCapacity() - dto.getScholarships();
+        courseToSave.setDirectPurchaseCounter(directPurchaseCounter);
+        courseToSave.setScholarships(dto.getScholarships());
+
         Course courseSaved = courseRepository.save(courseToSave);
         CourseDTO courseDTOSaved = courseMapper.toDto(courseSaved, context);
 
         return courseDTOSaved;
     }
+
+
 
     @Override
     public void delete(Long id) {
@@ -98,4 +113,43 @@ public class CourseService implements Services<CourseDTO>{
         }
         return courseDTO;
     }
+
+    public List<CourseDTO> getAllCoursesByCategory(Long categoryId, Integer page) {
+        Page<Course> courseByCategoryList = courseRepository
+                .findAllByCategory(categoryId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+
+        List<Course> allByCategory = courseByCategoryList.getContent();
+        List<CourseDTO> courseByCategoryListDTO = courseMapper.toDto(allByCategory, context);
+        return courseByCategoryListDTO;
+    }
+
+
+
+    public List<CourseDTO> getAllCoursesByCompany(Long companyId, Integer page){
+        Page<Course> courseByCompany = courseRepository
+                .findAllByCompany(companyId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+        List<Course> allByCompany = courseByCompany.getContent();
+        List<CourseDTO> courseByCompanyDTO = courseMapper.toDto(allByCompany, context);
+        return courseByCompanyDTO;
+    }
+
+
+    public List<CourseDTO> getAllCoursesByCompanyAndCategory(Long companyId, Long categoryId, Integer page){
+        Page<Course> coursesByCompanyAndCategory = courseRepository.
+                findAllByCompanyAndCategory(companyId, categoryId, PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+
+        List<Course> allByCompanyCategory = coursesByCompanyAndCategory.getContent();
+        List<CourseDTO> coursesByCompanyAndCategoryDTO = courseMapper.toDto(allByCompanyCategory, context);
+        return coursesByCompanyAndCategoryDTO;
+    }
+
+
+    public List<CourseDTO> getAllCoursesByStudentAndStatus(Boolean finished, Integer page){
+        Page<Course> courseByStudentAndStatus = courseRepository.
+                findAllByStudentAndStatus(Boolean.valueOf(finished), PageRequest.of(page, 5, Sort.Direction.ASC, "id"));
+        List<Course> courseByStudentStatus = courseByStudentAndStatus.getContent();
+        List<CourseDTO> courseByStudentStatusDTO = courseMapper.toDto(courseByStudentStatus, context);
+        return courseByStudentStatusDTO;
+    }
+
 }

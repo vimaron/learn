@@ -41,4 +41,28 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private Set<StudentHasCourse> studentHasCourses;
 
+    public Student setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Student setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Student setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Student setGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public Student setAddress(String address) {
+        this.address = address;
+        return this;
+    }
 }

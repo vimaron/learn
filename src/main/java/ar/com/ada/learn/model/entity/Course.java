@@ -1,6 +1,5 @@
 package ar.com.ada.learn.model.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,10 +26,16 @@ public class Course {
     private Long hours;
 
     @Column(name = "scholarships", nullable = false)
-    private Long scholarships ;
+    private Integer scholarships ;
 
     @Column(name = "capacity", nullable = false)
-    private Long capacity;
+    private Integer capacity;
+
+    @Column(nullable = false, name = "direct_purchase_counter")
+    private Integer directPurchaseCounter;
+
+    @Column(nullable = false, name = "scholarship_counter")
+    private Integer scholarshipCounter;
 
     @Column(name = "description", nullable = false, length = 200)
     private String description;
@@ -52,4 +57,58 @@ public class Course {
     private Set<StudentHasCourse> studentHasCourses;
 
 
+    public Course setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Course setPrice(Double price) {
+        this.price = price;
+        return this;
+    }
+
+    public Course setHours(Long hours) {
+        this.hours = hours;
+        return this;
+    }
+
+    public Course setScholarships(Integer scholarships) {
+        this.scholarships = scholarships;
+        return this;
+    }
+
+    public Course setCapacity(Integer capacity) {
+        this.capacity = capacity;
+        return this;
+    }
+
+    public Course setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Course setCompany(Company company) {
+        this.company = company;
+        return this;
+    }
+
+    public Course setCourseMode(CourseMode courseMode) {
+        this.courseMode = courseMode;
+        return this;
+    }
+
+    public Course setTypeOfCourse(TypeOfCourse typeOfCourse) {
+        this.typeOfCourse = typeOfCourse;
+        return this;
+    }
+
+    public Course setDirectPurchaseCounter(Integer directPurchaseCounter) {
+        this.directPurchaseCounter = directPurchaseCounter;
+        return this;
+    }
+
+    public Course setScholarshipCounter(Integer scholarshipCounter) {
+        this.scholarshipCounter = scholarshipCounter;
+        return this;
+    }
 }
