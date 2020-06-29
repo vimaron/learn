@@ -20,10 +20,13 @@ public class StudentHasCourse implements Serializable {
     private String adjType;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private Boolean status;
+
+    @Column(name = "finished", nullable = false)
+    private Boolean finished;
 
     @Column(name = "percentage", nullable = false)
-    private Long percentage;
+    private Integer percentage;
 
     @ManyToOne
     @MapsId("studentId")
@@ -32,4 +35,20 @@ public class StudentHasCourse implements Serializable {
     @ManyToOne
     @MapsId("courseId")
     private Course course;
+
+
+    public StudentHasCourse setId(StudentHasCourseId id) {
+        this.id = id;
+        return this;
+    }
+
+    public StudentHasCourse setStudent(Student student) {
+        this.student = student;
+        return this;
+    }
+    public StudentHasCourse setCourse(Course course) {
+        this.course = course;
+        return this;
+    }
+
 }

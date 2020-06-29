@@ -24,4 +24,9 @@ public class TypeOfCourse {
     @OneToMany(mappedBy = "typeOfCourse")
     private Set<Course> courses;
 
+
+    public TypeOfCourse(String type){
+        this.type = type;
+    }
+
 }

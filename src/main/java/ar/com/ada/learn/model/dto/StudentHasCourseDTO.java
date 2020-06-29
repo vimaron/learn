@@ -20,10 +20,13 @@ public class StudentHasCourseDTO {
     private String adjType;
 
     @NotBlank(message = "status is required")
-    private String status;
+    private Boolean status;
+
+    @NotBlank(message = "finished is required")
+    private Boolean finished;
 
     @NotBlank(message = "percentaje is required")
-    private Long percentage;
+    private Integer percentage;
 
     private StudentDTO student;
     private CourseDTO course;

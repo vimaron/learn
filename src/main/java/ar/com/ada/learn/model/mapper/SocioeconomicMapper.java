@@ -1,9 +1,7 @@
 package ar.com.ada.learn.model.mapper;
 
 import ar.com.ada.learn.model.dto.SocioeconomicDTO;
-import ar.com.ada.learn.model.dto.StudentDTO;
 import ar.com.ada.learn.model.entity.SocioEconomic;
-import ar.com.ada.learn.model.entity.Student;
 import org.mapstruct.Context;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -16,5 +14,5 @@ public interface SocioeconomicMapper extends DataCycleMapper <SocioeconomicDTO, 
 
     @InheritInverseConfiguration
     @Mapping(target = "studentId", ignore = true)
-    StudentDTO toDto(Student entity, @Context CycleAvoidingMappingContext context);
+    SocioeconomicDTO toDto(SocioEconomic entity, @Context CycleAvoidingMappingContext context);
 }
