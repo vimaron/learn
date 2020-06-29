@@ -1,4 +1,4 @@
-package ar.com.ada.learn.model.mapper;
+package ar.com.ada.learn.model.mapper.circular;
 
 import org.mapstruct.BeforeMapping;
 import org.mapstruct.MappingTarget;
